@@ -106,13 +106,14 @@ const { body, validationResult } = require('express-validator');
 
 app.post('/send-email', [
   body('Name').trim().notEmpty().withMessage('Name is required.'),
-  body('email').isEmail().withMessage('Valid email is required.'),
-  body('Phone').isMobilePhone().withMessage('Valid phone number required.'),
-  body('City').notEmpty(),
-  body('Company').notEmpty(),
-  body('Services').notEmpty(),
-  body('Message').notEmpty()
+  body('email').trim().isEmail().withMessage('Valid email is required.'),
+  body('Phone').trim().isMobilePhone().withMessage('Valid phone number required.'),
+  body('City').trim().notEmpty().withMessage('City is required.'),
+  body('Company').trim().notEmpty().withMessage('Company is required.'),
+  body('Services').trim().notEmpty().withMessage('Services are required.'),
+  body('Message').trim().notEmpty().withMessage('Message is required.')
 ], async (req, res) => {
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ success: false, errors: errors.array() });
