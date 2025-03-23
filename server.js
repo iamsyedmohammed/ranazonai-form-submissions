@@ -19,6 +19,8 @@ if (!fs.existsSync(configPath)) {
 
 // Write credentials.json from environment variable
 const credentialsFilePath = path.join(configPath, 'credentials.json');
+console.log('GOOGLE_CREDENTIALS_JSON loaded?', !!process.env.GOOGLE_CREDENTIALS_JSON);
+
 fs.writeFileSync(credentialsFilePath, process.env.GOOGLE_CREDENTIALS_JSON);
 
 // Set this so your code below still works
