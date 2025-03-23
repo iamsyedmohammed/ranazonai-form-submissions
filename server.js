@@ -7,6 +7,23 @@ const path = require('path');
 require('dotenv').config();
 
 const app = express();
+app.set('trust proxy', 1); // Fix for rate limiter behind proxy
+
+const fs = require('fs');
+
+// Ensure config directory exists
+const configPath = path.join(__dirname, 'config');
+if (!fs.existsSync(configPath)) {
+  fs.mkdirSync(configPath);
+}
+
+// Write credentials.json from environment variable
+const credentialsFilePath = path.join(configPath, 'credentials.json');
+fs.writeFileSync(credentialsFilePath, process.env.GOOGLE_CREDENTIALS_JSON);
+
+// Set this so your code below still works
+process.env.GOOGLE_APPLICATION_CREDENTIALS = credentialsFilePath;
+
 const PORT = process.env.PORT || 3000;
 
 
