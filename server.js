@@ -43,6 +43,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.get('/', (req, res) => {
+  res.status(200).send('✅ Ranazonai backend is live and ready!');
+});
+
+
 // Function to save data to Google Sheet
 async function saveToGoogleSheet(data) {
   const auth = new google.auth.GoogleAuth({
