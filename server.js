@@ -47,6 +47,11 @@ app.get('/', (req, res) => {
   res.status(200).send('✅ Ranazonai backend is live and ready!');
 });
 
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong 🏓');
+});
+
+
 
 // Function to save data to Google Sheet
 async function saveToGoogleSheet(data) {
